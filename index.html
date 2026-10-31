@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b0e13">
+  <meta name="description" content="Tableau de bord de projets pour le navigateur Tesla : ChatGPT Plus, Work et raccourcis personnels, sans API payante.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <link rel="icon" href="./icons/hub.svg" type="image/svg+xml">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Tesla AI Hub — Tableau de bord</title>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" class="svg-sprite" aria-hidden="true">
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9L12 2Z"/><path d="m19 16 .6 1.8L21.5 18l-1.9.6L19 20.5l-.6-1.9-1.9-.6 1.9-.2L19 16Z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3V7Z"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 1-8 8 9 9 0 0 1-3.2-.6L4 20l1.6-4.8A8 8 0 1 1 20 11Z"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M10.3 2h3.4l.7 2.2 2 .9 2.1-1.1L21 6.5l-1.1 2.1.9 2L23 11.3v3.4l-2.2.7-.9 2 1.1 2.1-2.5 2.5-2.1-1.1-2 .9-.7 2.2h-3.4l-.7-2.2-2-.9-2.1 1.1L3 19.5l1.1-2.1-.9-2L1 14.7v-3.4l2.2-.7.9-2L3 6.5 5.5 4l2.1 1.1 2-.9L10.3 2Z" transform="translate(1 -1) scale(.91)"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M13 5h6v6m0-6-9 9"/><path d="M19 13v6H5V5h6"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0m-7 7v3m-4 0h8"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 20"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24"><path d="m4 17-.5 3.5L7 20l12-12-3-3L4 17Zm10-10 3 3"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3m-9 0 1 13h10l1-13M10 11v6m4-6v6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v7c0 5 3.5 8.2 8 10 4.5-1.8 8-5 8-10V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-5 1-6-2-6-2m12 4v-3c0-1 .2-1.5.5-2 3.6-.4 5.5-2.3 5.5-5.5A5.5 5.5 0 0 0 19.5 6c.2-1.2 0-2.4-.6-3.5-1.2 0-2.3.5-3.2 1.2a14 14 0 0 0-7.4 0C7.4 3 6.3 2.5 5.1 2.5A6.2 6.2 0 0 0 4.5 6 5.5 5.5 0 0 0 3 10.5c0 3.2 1.9 5.1 5.5 5.5.3.5.5 1 .5 2v3"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4m0-14.2-1.4 1.4M6.3 17.7l-1.4 1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2.5 20h19L12 3Z"/><path d="M12 9v5m0 3v.1"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5C9 3.5 5 3 2 4v15c4-1 7-.5 10 1 3-1.5 6-2 10-1V4c-3-1-7-.5-10 1Zm0 0v15"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navigation principale">
+      <a class="brand" href="#accueil" aria-label="Tesla AI Hub, accueil">
+        <span class="brand-mark"><svg><use href="#i-spark"/></svg></span>
+        <span class="brand-text"><b>AI HUB</b><small>MODEL 3 EDITION</small></span>
+      </a>
+      <div class="sidebar-caption">TABLEAU DE BORD</div>
+      <nav class="side-nav" aria-label="Sections">
+        <a href="#accueil" data-nav="accueil" class="nav-link active"><svg><use href="#i-grid"/></svg><span>Accueil</span></a>
+        <a href="#projets" data-nav="projets" class="nav-link"><svg><use href="#i-folder"/></svg><span>Mes projets</span></a>
+        <a href="#prompts" data-nav="prompts" class="nav-link"><svg><use href="#i-message"/></svg><span>Prompts rapides</span></a>
+        <a href="#reglages" data-nav="reglages" class="nav-link"><svg><use href="#i-settings"/></svg><span>Réglages</span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <span class="connection-pill"><span class="dot"></span> Sans API · Sans serveur</span>
+        <p>Interface indépendante. Aucun accès aux commandes du véhicule.</p>
+        <div class="sidebar-version">TESLA AI HUB <span>v1.0</span></div>
+      </div>
+    </aside>
+
+    <div class="content-column">
+      <header class="topbar">
+        <div class="topbar-left"><span class="topbar-label">MON ESPACE</span><span class="topbar-separator"></span><span id="currentSection">Accueil</span></div>
+        <div class="topbar-right"><span class="topbar-safety">À utiliser à l'arrêt pour naviguer</span><span class="clock" id="clock">--:--</span><span id="dateLabel" class="date-label"></span></div>
+      </header>
+
+      <main id="mainContent">
+        <section class="view active" data-view="accueil" aria-labelledby="homeTitle">
+          <div class="welcome-line"><span class="eyebrow">VOTRE ESPACE DE TRAVAIL EMBARQUÉ</span><span class="status-badge"><span class="dot cyan"></span> Model 3 · Navigateur</span></div>
+          <div class="welcome-title"><h1 id="homeTitle">Bonjour, <span>où allons-nous<br class="desktop-break"> avancer aujourd'hui ?</span></h1><p>Vos idées, vos projets et ChatGPT Plus, accessibles depuis l'écran central.</p></div>
+
+          <section class="hero" aria-label="Ouvrir ChatGPT">
+            <div class="hero-glow" aria-hidden="true"></div>
+            <div class="hero-content">
+              <span class="hero-eyebrow"><svg><use href="#i-spark"/></svg> VOTRE COPILOTE NUMÉRIQUE</span>
+              <h2>Les idées prennent<br><em>la route.</em></h2>
+              <p>Retrouvez ChatGPT et passez en mode Work pour travailler à la voix avec votre abonnement Plus.</p>
+              <div class="hero-actions">
+                <a class="btn primary big" href="https://chatgpt.com/" rel="noopener"><svg><use href="#i-mic"/></svg> Ouvrir ChatGPT <svg class="right-icon"><use href="#i-arrow"/></svg></a>
+                <a class="btn secondary big" href="#prompts"><svg><use href="#i-message"/></svg> Mes prompts</a>
+              </div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="glow-disc"></div>
+              <div class="ai-orb"><div class="orb-inner"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></div></div>
+              <div class="floating-label"><span class="dot cyan"></span> COMPATIBLE PLUS</div>
+              <div class="orbit orbit-1"></div><div class="orbit orbit-2"></div>
+            </div>
+          </section>
+
+          <div class="quick-row">
+            <a href="https://chatgpt.com/" class="quick-card" rel="noopener"><span class="quick-icon blue"><svg><use href="#i-mic"/></svg></span><span><strong>Conversation vocale</strong><small>Démarrer dans ChatGPT</small></span><svg class="quick-chevron"><use href="#i-chevron"/></svg></a>
+            <a href="https://chatgpt.com/" class="quick-card" rel="noopener"><span class="quick-icon lavender"><svg><use href="#i-spark"/></svg></span><span><strong>ChatGPT Work</strong><small>Choisir « Work » après ouverture</small></span><svg class="quick-chevron"><use href="#i-chevron"/></svg></a>
+            <a href="https://github.com/" class="quick-card" rel="noopener"><span class="quick-icon mint"><svg><use href="#i-github"/></svg></span><span><strong>GitHub</strong><small>Consulter vos dépôts</small></span><svg class="quick-chevron"><use href="#i-chevron"/></svg></a>
+          </div>
+
+          <div class="section-row"><div><span class="eyebrow">ACCÈS RAPIDE</span><h2>Vos projets</h2></div><a href="#projets" class="text-link">Tous les projets <svg><use href="#i-arrow"/></svg></a></div>
+          <div id="homeProjects" class="home-projects project-grid"></div>
+          <div class="bottom-info"><svg><use href="#i-shield"/></svg><div><strong>Une passerelle, pas un remplacement de ChatGPT.</strong><p>Pour conserver Plus et Work, l'assistant s'ouvre sur le site officiel ChatGPT. Aucun identifiant ni jeton n'est collecté par AI Hub.</p></div></div>
+        </section>
+
+        <section class="view" data-view="projets" aria-labelledby="projectsTitle">
+          <div class="section-header"><div><span class="eyebrow">PERSONNALISATION</span><h1 id="projectsTitle">Mes projets</h1><p>Accédez à vos conversations ChatGPT et dépôts GitHub en un geste.</p></div><button type="button" class="btn primary" id="addProject"><svg><use href="#i-plus"/></svg> Ajouter un projet</button></div>
+          <div class="section-panel"><div class="panel-label">PROJETS ENREGISTRÉS <span id="projectCount"></span></div><div id="allProjects" class="project-grid all-projects"></div></div>
+          <p class="footnote">Les liens de projets sont enregistrés uniquement dans ce navigateur. Pour obtenir le lien ChatGPT d'un projet, ouvrez-le sur ChatGPT et copiez son adresse.</p>
+        </section>
+
+        <section class="view" data-view="prompts" aria-labelledby="promptsTitle">
+          <div class="section-header"><div><span class="eyebrow">GAGNEZ DU TEMPS</span><h1 id="promptsTitle">Prompts rapides</h1><p>Préparez une demande claire pour ChatGPT Work ou une conversation vocale.</p></div></div>
+          <div class="prompt-catalog" id="promptCatalog"></div>
+          <div class="bottom-info compact"><svg><use href="#i-copy"/></svg><div><strong>Copiez puis collez.</strong><p>Les prompts ne sont pas envoyés automatiquement : AI Hub ne peut pas contrôler votre session ChatGPT.</p></div></div>
+        </section>
+
+        <section class="view" data-view="reglages" aria-labelledby="settingsTitle">
+          <div class="section-header"><div><span class="eyebrow">PERSONNALISATION</span><h1 id="settingsTitle">Réglages</h1><p>Un tableau de bord simple, sans compte supplémentaire ni suivi publicitaire.</p></div></div>
+          <div class="settings-grid">
+            <div class="settings-panel"><h2>Apparence</h2><p>Choisissez un affichage adapté à l'habitacle.</p><div class="segmented" role="group" aria-label="Thème"><button type="button" id="themeDark" class="active"><svg><use href="#i-moon"/></svg> Sombre</button><button type="button" id="themeLight"><svg><use href="#i-sun"/></svg> Clair</button></div></div>
+            <div class="settings-panel session-panel">
+              <h2>Connexion ChatGPT Plus</h2>
+              <p>La connexion se fait uniquement sur <strong>chatgpt.com</strong>. Tesla AI Hub ne demande, ne lit et n’enregistre jamais votre mot de passe.</p>
+              <div class="session-steps" aria-label="Conserver votre session ChatGPT">
+                <div><span class="step-number">1</span><span>Ouvrez ChatGPT et connectez-vous directement sur le site officiel.</span></div>
+                <div><span class="step-number">2</span><span>Revenez à AI Hub, puis ouvrez ChatGPT à nouveau sans effacer les données du navigateur.</span></div>
+                <div><span class="step-number">3</span><span>Après un redémarrage du navigateur Tesla, vérifiez si la session est toujours active.</span></div>
+              </div>
+              <a class="btn primary" href="https://chatgpt.com/" rel="noopener"><svg><use href="#i-external"/></svg> Ouvrir / vérifier ma session</a>
+              <p class="session-disclaimer">La conservation des cookies dépend du navigateur Tesla et de ChatGPT. Aucun site tiers ne peut forcer une connexion permanente ou vérifier votre état de connexion sur ChatGPT.</p>
+            </div>
+            <div class="settings-panel"><h2>Test du microphone</h2><p>Vérifie seulement si le navigateur autorise l'accès au micro. Cela ne garantit pas que le mode vocal ChatGPT fonctionne.</p><button type="button" class="btn secondary" id="testMic"><svg><use href="#i-mic"/></svg> Tester l'accès micro</button><div id="micResult" class="setting-feedback" role="status"></div></div>
+            <div class="settings-panel"><h2>Sauvegarder vos projets</h2><p>Exportez vos raccourcis en JSON pour les réimporter dans un autre navigateur.</p><div class="inline-actions"><button type="button" class="btn secondary" id="exportSettings"><svg><use href="#i-download"/></svg> Exporter</button><button type="button" class="btn secondary" id="importSettings">Importer</button><input id="importFile" type="file" accept="application/json,.json" hidden></div></div>
+            <div class="settings-panel"><h2>Réinitialiser</h2><p>Supprime les personnalisations et restaure les projets proposés par défaut.</p><button type="button" class="btn danger-outline" id="resetSettings"><svg><use href="#i-trash"/></svg> Réinitialiser AI Hub</button></div>
+          </div>
+          <div class="safety-note"><svg><use href="#i-alert"/></svg><div><strong>À propos de cette application</strong><p>AI Hub est un site Web indépendant, non affilié à Tesla ni à OpenAI. Il ne contrôle pas le véhicule, ne connaît pas son autonomie et ne remplace pas Grok. Préférez les actions tactiles lorsque le véhicule est stationné.</p></div></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Navigation mobile">
+    <a href="#accueil" data-nav="accueil" class="active"><svg><use href="#i-grid"/></svg><span>Accueil</span></a>
+    <a href="#projets" data-nav="projets"><svg><use href="#i-folder"/></svg><span>Projets</span></a>
+    <a href="#prompts" data-nav="prompts"><svg><use href="#i-message"/></svg><span>Prompts</span></a>
+    <a href="#reglages" data-nav="reglages"><svg><use href="#i-settings"/></svg><span>Réglages</span></a>
+  </nav>
+
+  <dialog id="projectDialog" aria-labelledby="projectDialogTitle">
+    <form method="dialog" id="projectForm" novalidate>
+      <div class="dialog-header"><div><span class="eyebrow">RACCOURCI PERSONNALISÉ</span><h2 id="projectDialogTitle">Ajouter un projet</h2></div><button value="cancel" formnovalidate class="close-dialog" type="button" id="closeProject" aria-label="Fermer">×</button></div>
+      <input type="hidden" id="projectId">
+      <label for="projectName">Nom du projet <span>*</span></label><input id="projectName" maxlength="50" autocomplete="off" required placeholder="Ex. Mario Party 4">
+      <label for="projectDescription">Description</label><input id="projectDescription" maxlength="90" autocomplete="off" placeholder="Ex. Port PC et netplay">
+      <label for="projectChatUrl">Lien ChatGPT du projet (facultatif)</label><input id="projectChatUrl" type="url" inputmode="url" placeholder="https://chatgpt.com/g/...">
+      <label for="projectRepoUrl">Lien GitHub ou documentation (facultatif)</label><input id="projectRepoUrl" type="url" inputmode="url" placeholder="https://github.com/...">
+      <p class="dialog-note" id="projectError" role="alert"></p>
+      <div class="dialog-actions"><button type="button" class="btn danger-outline" id="deleteProject" hidden>Supprimer</button><span class="flex-spacer"></span><button type="button" class="btn secondary" id="cancelProject">Annuler</button><button type="submit" class="btn primary">Enregistrer</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="promptDialog" aria-labelledby="promptDialogTitle">
+    <div class="dialog-header"><div><span class="eyebrow">PRÊT À UTILISER</span><h2 id="promptDialogTitle">Prompt</h2></div><button type="button" class="close-dialog" id="closePrompt" aria-label="Fermer">×</button></div>
+    <label for="promptText">Modifiez le texte si nécessaire</label><textarea id="promptText" rows="8"></textarea>
+    <p class="dialog-note">Copiez le prompt, puis ouvrez ChatGPT. Pour les tâches longues, sélectionnez Work dans ChatGPT.</p>
+    <div class="dialog-actions"><button type="button" class="btn secondary" id="copyPrompt"><svg><use href="#i-copy"/></svg> Copier</button><a class="btn primary" href="https://chatgpt.com/" rel="noopener">Ouvrir ChatGPT <svg><use href="#i-external"/></svg></a></div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
