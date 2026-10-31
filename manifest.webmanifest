@@ -1,0 +1,19 @@
+{
+  "name": "Tesla AI Hub — Projets et ChatGPT",
+  "short_name": "AI Hub",
+  "description": "Tableau de bord Tesla vers ChatGPT Plus et Work",
+  "start_url": "./#accueil",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b0e13",
+  "theme_color": "#0b0e13",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "./icons/hub.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
