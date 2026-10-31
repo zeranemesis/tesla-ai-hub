@@ -6,7 +6,7 @@ const defaults=[
 {id:'mp4',name:'Mario Party 4',description:'Port PC natif et netplay',chatUrl:'',repoUrl:'https://github.com/zeranemesis/Marioparty4'},
 {id:'sunshine',name:'Super Mario Sunshine',description:'Port PC et mods',chatUrl:'',repoUrl:'https://github.com/zeranemesis/sms-port'},
 {id:'shelf',name:'DecompShelf',description:'Assistant IA et guides de jeu',chatUrl:'',repoUrl:''},
-{id:'mkds',name:'Mario Kart DS',description:'Décompilation et port PC',chatUrl:'',repoUrl:'https://github.com/zeranemesis/mkds-eur-decomp'}];
+{id:'mkds',name:'Mario Kart DS',description:'Décompilation et port PC',chatUrl:'',repoUrl:''}];
 const templates=[
 ['DÉVELOPPEMENT','Faire avancer un projet','Analyser mon dépôt et proposer les prochaines tâches.','Analyse mon projet et son dépôt GitHub connecté. Identifie les blocages, les risques de régression et les trois améliorations prioritaires. Propose un plan testable, puis demande mon accord avant toute modification importante.'],
 ['DÉBOGAGE','Diagnostiquer un bug','Construire des hypothèses et des tests.','Aide-moi à diagnostiquer un bug. Propose des hypothèses vérifiables, les logs nécessaires, une procédure de reproduction et le correctif minimal. Distingue toujours un test réellement exécuté d’un simple raisonnement.'],
